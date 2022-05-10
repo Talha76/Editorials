@@ -1,1 +1,1 @@
-From the problem statement we can easily deduce that ![alt text](https://github.com/Talha76/Editorials/blob/main/files/images/CodeCogsEqn.png). And using this equation we can easily find out the values of a and b.
+From the problem statement we can easily deduce that ![](https://latex.codecogs.com/svg.image?y=b^{a}\cdot&space;x). And using this equation we can easily find out the values of a and b.
