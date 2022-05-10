@@ -1,1 +1,1 @@
-From the problem statement we can easily deduce that ![](https://github.com/Talha76/Editorials/blob/main/Codeforces/Div3%23786/.CommonFiles/images/A1.png). And using this equation we can easily find out the values of a and b.
+From the problem statement we can easily deduce that ![](https://latex.codecogs.com/svg.image?y=b^{a}\cdot&space;x). And using this equation we can easily find out the values of a and b.
