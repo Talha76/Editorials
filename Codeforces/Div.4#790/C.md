@@ -8,7 +8,7 @@
 
   The minimum number of moves to make two characters ![](https://latex.codecogs.com/svg.image?a) & ![](https://latex.codecogs.com/svg.image?b) equal is 
   ![](https://latex.codecogs.com/svg.image?\left|a-b\right|). Now we can apply brute force on the array to compare each of the pair of the strings to get the minimum number of moves to make two strings equal in ![](https://latex.codecogs.com/svg.image?O(n^2)) time complexity. We can get the total number of moves to make two strings 
-  ![](https://latex.codecogs.com/svg.image?s) & ![](https://latex.codecogs.com/svg.image?t) equal by doing ![](https://latex.codecogs.com/svg.image?\sum_{i=1}^{m}(\left|s_i-t_i\right|)).
+  ![](https://latex.codecogs.com/svg.image?s) & ![](https://latex.codecogs.com/svg.image?t) equal by doing ![](https://latex.codecogs.com/svg.image?\sum_{i=1}^{m}\left|s_i-t_i\right|).
 </details>
 <details>
   <summary>Solution</summary>
