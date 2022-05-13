@@ -20,6 +20,7 @@
   #define fast ios::sync_with_stdio(0);cin.tie(0)
   #define tests int T;cin>>T;for(int kase=1;kase<=T;kase++)
   #define all(v) v.begin(), v.end()
+  #define ulta(v) v.rbegin(), v.rend()
 
   using namespace std;
 
