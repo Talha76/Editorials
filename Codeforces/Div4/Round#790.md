@@ -374,8 +374,8 @@
 <details>
   <summary>Tutorial</summary>
 
-  Observing the statement we can find that, two wires have one crossing if and only if <img src="https://latex.codecogs.com/svg.image?i<j&space;\textit{&space;and&space;}a_i\geq&space;a_j" title="https://latex.codecogs.com/svg.image?i<j \textit{ and }a_i\geq a_j" /> or 
-  <img src="https://latex.codecogs.com/svg.image?i>j&space;\textit{&space;and&space;}a_i\leq&space;a_j" title="https://latex.codecogs.com/svg.image?i>j \textit{ and }a_i\leq a_j" />. 
+  Observing the statement we can find that, two wires have one crossing if and only if <img src="https://latex.codecogs.com/svg.image?i<j&space;\textit{&space;and&space;}a_i\geq&space;a_j" /> or 
+  <img src="https://latex.codecogs.com/svg.image?i>j&space;\textit{&space;and&space;}a_i\leq&space;a_j" />. 
   But we need just one of the above conditions for counting crossings. Because if we count for both conditions then the answer is doubled. So we just take one of the 
   conditions.
 
