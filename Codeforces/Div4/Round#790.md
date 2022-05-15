@@ -362,3 +362,72 @@
   }
   ```
 </details>
+
+## G. White-Black Balanced Subtrees
+
+## H1. Maximum Crossings (Easy Version)
+<details>
+  <summary>Hint</summary>
+
+  Find a condition for which two wires cross each other.
+</details>
+<details>
+  <summary>Tutorial</summary>
+
+  Observing the statement we can find that, two wires have one crossing if and only if <img src="https://latex.codecogs.com/svg.image?i<j&space;\textit{&space;and&space;}a_i\geq&space;a_j" title="https://latex.codecogs.com/svg.image?i<j \textit{ and }a_i\geq a_j" /> or 
+  <img src="https://latex.codecogs.com/svg.image?i>j&space;\textit{&space;and&space;}a_i\leq&space;a_j" title="https://latex.codecogs.com/svg.image?i>j \textit{ and }a_i\leq a_j" />. 
+  But we need just one of the above conditions for counting crossings. Because if we count for both conditions then the answer is doubled. So we just take one of the 
+  conditions.
+
+  So we can traverse for each of the `i` checking how many `j` meet the condition, which will take <img src="https://latex.codecogs.com/svg.image?O(n^2)" title="https://latex.codecogs.com/svg.image?O(n^2)" />, and we will get the answer.
+<details>
+<details>
+  <summary>Solution</summary>
+
+  ```cpp
+  /*
+   * author: Mushfiq_Talha
+   */
+  #include "bits/stdc++.h"
+
+  #define fast ios::sync_with_stdio(0);cin.tie(0)
+  #define tests int tst;cin>>tst;for(int kase=1;kase<=tst;kase++)
+  #define range(v, n) v, v + n
+  #define all(v) v.begin(), v.end()
+  #define toN(v, n) v.begin(), v.begin() + n
+  #define ulta(v) v.rbegin(), v.rend()
+
+  using namespace std;
+
+  typedef long long ll;
+  typedef pair<int, int> PII;
+
+  void solve() {
+      int n;
+      cin >> n;
+      vector<int> a(n);
+      for(auto &i: a)
+          cin >> i;
+
+      int cnt = 0;
+      for(int i = 0; i < n; i++) {
+          for(int j = 0; j < n; j++) {
+              if(i != j && a[j] <= a[i] && j >= i) {
+                  cnt++;
+              }
+          }
+      }
+
+      cout << cnt << '\n';
+  }
+
+  int main() {
+      fast;
+
+      tests
+          solve();
+
+      return 0;
+  }
+  ```
+</details>
