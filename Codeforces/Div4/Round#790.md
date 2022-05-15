@@ -412,7 +412,7 @@
       int cnt = 0;
       for(int i = 0; i < n; i++) {
           for(int j = 0; j < n; j++) {
-              if(i != j && a[j] <= a[i] && j >= i) {
+              if(i < j && a[i] >= a[j]) {
                   cnt++;
               }
           }
