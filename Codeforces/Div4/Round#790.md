@@ -380,7 +380,7 @@
   conditions.
 
   So we can traverse for each of the `i` checking how many `j` meet the condition, which will take <img src="https://latex.codecogs.com/svg.image?O(n^2)" title="https://latex.codecogs.com/svg.image?O(n^2)" />, and we will get the answer.
-<details>
+</details>
 <details>
   <summary>Solution</summary>
 
