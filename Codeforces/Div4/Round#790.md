@@ -279,3 +279,86 @@
   ```
 </details>
 
+## F. Longest Strike
+<details>
+  <summary>Tutorial</summary>
+
+  We have to sort the array and then separate the values which meet the condition <img src="https://latex.codecogs.com/svg.image?\bg{white}a_i\geq&space;k" title="https://latex.codecogs.com/svg.image?\bg{white}a_i\geq k" /> 
+  . Then within the separated values iterate through the values till two adjacent elements are not consecutive. And then compare the `l` and `r` with the condition 
+  given until the last element of the array.
+</details>
+<details>
+  <summary>Solution</summary>
+
+  ```cpp
+  /*
+   * author: Mushfiq_Talha
+   */
+  #include "bits/stdc++.h"
+
+  #define fast ios::sync_with_stdio(0);cin.tie(0)
+  #define tests int T;cin>>T;for(int kase=1;kase<=T;kase++)
+  #define range(v, n) v, v + n
+  #define all(v) v.begin(), v.end()
+  #define toN(v, n) v.begin(), v.begin() + n
+  #define ulta(v) v.rbegin(), v.rend()
+
+  using namespace std;
+
+  typedef long long ll;
+  typedef pair<int, int> PII;
+
+  void solve() {
+      int n, k;
+      cin >> n >> k;
+      map<int, int> cnt;
+      for(int i = 0; i < n; i++) {
+          int t;
+          cin >> t;
+          cnt[t]++;
+      }
+
+      vector<int> v;
+      for(auto [a, b]: cnt)
+          if(b < k)
+              v.push_back(a);
+
+      for(auto i: v)
+          cnt.erase(i);
+
+      v.clear();
+      for(auto [a, b]: cnt)
+          v.push_back(a);
+
+      if(v.empty()) {
+          cout << -1 << '\n';
+          return;
+      }
+
+      int l = v.front(), r, Max = 0;
+      PII ans;
+      v.push_back(1e9 + 5);
+      for(int i = 1; i < (int)v.size(); i++) {
+          if(v[i] - v[i - 1] > 1) {
+              r = v[i - 1];
+              if(r - l >= Max) {
+                  ans = {l, r};
+                  Max = r - l;
+              }
+              l = v[i];
+          }
+      }
+
+      cout << ans.first << ' ' << ans.second << '\n';
+  }
+
+  int main() {
+      fast;
+
+      tests
+          solve();
+
+      return 0;
+  }
+  ```
+</details>
