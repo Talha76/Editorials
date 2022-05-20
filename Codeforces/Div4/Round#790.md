@@ -437,12 +437,12 @@
 <details>
   <summary>Tutorial</summary>
 
-  For this problem, we can't use the <img src="https://latex.codecogs.com/svg.image?\bg{white}O(n^2)" title="https://latex.codecogs.com/svg.image?\bg{white}O(n^2)" /> 
-  as we've done in the previous solution. But we know that for each `i` and `j`, <img src="https://latex.codecogs.com/svg.image?\bg{white}a_i\geq&space;a_j" title="https://latex.codecogs.com/svg.image?\bg{white}a_i\geq a_j" />. 
-  So, we can store the values, and for each `i`, <img src="https://latex.codecogs.com/svg.image?\bg{white}1\leq&space;i\leq&space;n" title="https://latex.codecogs.com/svg.image?\bg{white}1\leq i\leq n" /> 
-  we can count the values which are less than <img src="https://latex.codecogs.com/svg.image?\bg{white}a_i" title="https://latex.codecogs.com/svg.image?\bg{white}a_i" />, 
-  and then delete <img src="https://latex.codecogs.com/svg.image?\bg{white}a_i" title="https://latex.codecogs.com/svg.image?\bg{white}a_i" /> from the list. In cpp, 
-  we have a data structure called ordered_set, using which we can find the number of values strictly less than `x` in <img src="https://latex.codecogs.com/svg.image?\bg{white}O(log(n))" title="https://latex.codecogs.com/svg.image?\bg{white}O(log(n))" /> 
+  For this problem, we can't use the $O(n^2)$ 
+  as we've done in the previous solution. But we know that for each $i$ and $j$, $a_i\geq a_j$. 
+  So, we can store the values, and for each $i$, $1\leq i\leq n$ 
+  we can count the values which are less than $a_i$, 
+  and then delete $a_i$ from the list. In cpp, 
+  we have a data structure called ordered_set, using which we can find the number of values strictly less than $x$ in $O(logn)$ 
   complexity.
 </details>
 <details>
