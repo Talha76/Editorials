@@ -52,7 +52,7 @@
  <summary>Tutorial</summary>
 
  Since we cannot add candies to any boxes, we have to make the number of candies of all the boxes equal to the minimum number of candies in a box, i.e. total number of
-  candies to eat is ![](https://latex.codecogs.com/svg.image?\sum_{i=5}^{n}(a_i-min(a))).
+  candies to eat is $\sum (a_i-min(a))$.
 </details>
 <details>
   <summary>Solution</summary>
@@ -100,9 +100,9 @@
 <details>
   <summary>Tutorial</summary>
 
-  The minimum number of moves to make two characters ![](https://latex.codecogs.com/svg.image?a) & ![](https://latex.codecogs.com/svg.image?b) equal is
-  ![](https://latex.codecogs.com/svg.image?\left|a-b\right|). Now we can apply brute force on the array to compare each of the pair of the strings to get the minimum number of moves to make two strings equal in ![](https://latex.codecogs.com/svg.image?O(n^2)) time complexity. We can get the total number of moves to make two strings
-  ![](https://latex.codecogs.com/svg.image?s) & ![](https://latex.codecogs.com/svg.image?t) equal by doing ![](https://latex.codecogs.com/svg.image?\sum_{i=1}^{m}\left|s_i-t_i\right|).
+  The minimum number of moves to make two characters $a$ & $b$ equal is
+  $\left|a-b\right|$. Now we can apply brute force on the array to compare each of the pair of the strings to get the minimum number of moves to make two strings equal in $O(n^2)$ time complexity. We can get the total number of moves to make two strings
+  $s$ & $t$ equal by doing $\sum \left|s_i-t_i\right|$.
 </details>
 <details>
   <summary>Solution</summary>
@@ -164,7 +164,7 @@
 <details>
   <summary>Tutorial</summary>
 
-  Just iterate over all of the cells and take sum at four diagonals of that cell and find the maximum of all sums at ![](https://latex.codecogs.com/svg.image?O(max(n,m)\cdot&space;n\cdot&space;m)).
+  Just iterate over all of the cells and take sum at four diagonals of that cell and find the maximum of all sums at $O(max(n,m)\cdot n\cdot m)$.
 </details>
 <details>
   <summary>Solution</summary>
@@ -232,8 +232,8 @@
 <details>
   <summary>Tutorial</summary>
 
-  At first, we solve this question with one query. For making the sum of sugars at least ![](https://latex.codecogs.com/svg.image?x), we can greedily choose the largest
-  numbers till we get sum greater than or equal to ![](https://latex.codecogs.com/svg.image?x); this way, we will get the minimum amount of candies. We can do this by sorting at first and then, traversing through the arrays and summing up until we get value greater than or equal to ![](https://latex.codecogs.com/svg.image?x). But doing this for large queries will be costly. So we can use a prefix sum array of the sorted array, and then doing binary search, since the prefix sum array will be sorted.
+  At first, we solve this question with one query. For making the sum of sugars at least $x$, we can greedily choose the largest
+  numbers till we get sum greater than or equal to $x$; this way, we will get the minimum amount of candies. We can do this by sorting at first and then, traversing through the arrays and summing up until we get value greater than or equal to $x$. But doing this for large queries will be costly. So we can use a prefix sum array of the sorted array, and then doing binary search, since the prefix sum array will be sorted.
 </details>
 <details>
   <summary>Solution</summary>
@@ -283,8 +283,8 @@
 <details>
   <summary>Tutorial</summary>
 
-  We have to sort the array and then separate the values which meet the condition <img src="https://latex.codecogs.com/svg.image?\bg{white}a_i\geq&space;k" title="https://latex.codecogs.com/svg.image?\bg{white}a_i\geq k" /> 
-  . Then within the separated values iterate through the values till two adjacent elements are not consecutive. And then compare the `l` and `r` with the condition 
+  We have to sort the array and then separate the values which meet the condition $a_i\geq k$ 
+  . Then within the separated values iterate through the values till two adjacent elements are not consecutive. And then compare the $l$ & $r$ with the condition 
   given until the last element of the array.
 </details>
 <details>
@@ -374,12 +374,13 @@
 <details>
   <summary>Tutorial</summary>
 
-  Observing the statement we can find that, two wires have one crossing if and only if <img src="https://latex.codecogs.com/svg.image?i<j&space;\textit{&space;and&space;}a_i\geq&space;a_j" /> or 
-  <img src="https://latex.codecogs.com/svg.image?i>j&space;\textit{&space;and&space;}a_i\leq&space;a_j" />. 
+  Observing the statement we can find that, two wires cross if and only one of these two conditions meet:  
+  $$i< j \textit{ and } a_i\geq a_j$$
+  $$i>j \textit{ and } a_i\leq a_j$$
   But we need just one of the above conditions for counting crossings. Because if we count for both conditions then we get twice of the answer. So we just take one of the 
   conditions.
 
-  So we can traverse for each of the `i` checking how many `j` meet the condition, which will take <img src="https://latex.codecogs.com/svg.image?O(n^2)" title="https://latex.codecogs.com/svg.image?O(n^2)" />, and we will get the answer.
+  So we can traverse for each of the $i$ checking how many $j$ meet the condition, which will take $O(n^2)$, and we will get the answer.
 </details>
 <details>
   <summary>Solution</summary>
