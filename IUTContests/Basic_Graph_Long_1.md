@@ -3,7 +3,7 @@
   <summary>Summary</summary>
 
   You are given 3 integers $L$, $U$, $R$, and an array $RV$ of $R$ intergers. You can do the following operation in one step-  
-  - At each step, choose any interger $x$ from the given array $RV$ and replace $L$ with $(x+L)\mod10000$.  
+  - At each step, choose any interger $x$ from the given array $RV$ and replace $L$ with $(x+L)\mod 10000$.  
 
   Let us define $distance$ from $i$ to $j$ as the number of operations needed to make $i=j$. Find the minimum distance from $L$ to $U$ 
   or state that it is impossible to make $U$ from $L$ using the above operation.
