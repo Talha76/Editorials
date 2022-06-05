@@ -24,7 +24,7 @@
   If it is possible to get $U$ from $L$, then $U$ will be visited once. Otherwise, $U$ will never be visited. (And obviously the 
   queue will not run into $\infty$. Because, we can visit at most 10000 numbers, and after visiting all of these numbers, the new 
   numbers will be already visited.) At the end, if $U$ was visited then the answer is $distance[U]$. And if not, then the answer 
-  is $1$.
+  is $-1$.
 </details>
 <details>
   <summary>Solution</summary>
