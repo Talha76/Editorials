@@ -196,3 +196,129 @@
   }
   ```
 </details>
+
+## [C - Morning Walk](https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=1537)
+
+## [D - Crazy King](https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=2327)
+<details>
+  <summary>Summary</summary>
+
+  You are given a $N\times M$ chessboard which contains any of these symbols ${'.','Z','A','B'}$. Cells containing $'Z'$ are the cells occupied by knights. $'.'$ means unoccupied cells.  
+
+  You have to go to $'B'$ from $'A'$ satisfying the conditions below:  
+  - You can move forward or backward by one step at a time diagonally, horizontally or 
+  vertically i.e. like a king in a chessboard. (Because you are the king!)
+  - You cannot move to a cell which is occupied by a knight.
+  - If any of the knights can move to a cell in one move, then you cannot move to that 
+  cell i.e. all accessible cells from the knights are blocked for you.  
+
+  Find minimum distance from $B$ to $A$, or if it is not possible then, print as requested in the statement.
+</details>
+<details>
+  <summary>Tutorial</summary>
+
+  We can traverse through all possible accessible cells using BFS. While we are on a cell, 
+  if the child cells (the cells to which we can go in one move) are not blocked by the above conditions, then we can visit the child cells and update its distance by 
+  $distance[child]=distance[parent]+1$.  
+
+  *How can we check if a cell is blocked?*  
+  If we are on a cell and in one knight move from that cell we can go to a cell which is occupied by a knight then obviously our present cell is blocked. Another way to do this 
+  is, before applying bfs, we can visit all the cells which are occupied by knights and 
+  from each cell we can make one knight move and mark the new cells as blocked.  
+
+  After completing this journey print the $distance[B]$ or print as requested in the statement if $B$ was never visited.
+</details>
+<details>
+  <summary>Solution</summary>
+
+  ```cpp
+  #include "bits/stdc++.h"
+
+  #define fast ios::sync_with_stdio(0);cin.tie(0)
+  #define tests int t=1;if(multi_test)cin>>t;for(int kase=1;kase<=t;kase++)
+  #define caseout cout << "Case " << kase << ": "
+  #define range(v, n) v, v + n
+  #define all(v) v.begin(), v.end()
+  #define toN(v, n) v.begin(), v.begin() + n
+  #define ulta(v) v.rbegin(), v.rend()
+
+  using namespace std;
+
+  typedef long long ll;
+  typedef pair<int, int> PII;
+
+  const bool multi_test = true;
+  int m, n;
+  PII a, b;
+  int d[101][101];
+  vector<string> grid;
+  vector<PII> horse_dir{{2, 1}, {-2, 1}, {2, -1}, {-2, -1},
+                  {1, 2}, {-1, 2}, {1, -2}, {-1, -2}};
+  vector<PII> king_dir{{1, 1}, {-1, 1}, {1, -1}, {-1, -1},
+                      {1, 0}, {-1, 0}, {0,  1}, { 0, -1}};
+
+  void findab() {
+    for(int i = 0; i < m; i++) {
+      for(int j = 0; j < n; j++) {
+        if(grid[i][j] == 'A')
+          a = {i, j};
+        if(grid[i][j] == 'B')
+          b = {i, j};
+      }
+    }
+  }
+
+  bool is_valid(int x, int y) {
+    if(x < 0 || y < 0 || x >= m || y >= n || grid[x][y] == 'Z')
+      return false;
+    if(grid[x][y] == 'B')
+      return true;
+    for(auto [s, t]: horse_dir) {
+      int X = x + s, Y = y + t;
+      if(X >= 0 && Y >= 0 && X < m && Y < n && grid[X][Y] == 'Z')
+        return false;
+    }
+    return true;
+  }
+
+  void solve() {
+    cin >> m >> n;
+    grid.resize(m);
+    for(auto &i: grid)
+      cin >> i;
+
+    findab();
+    memset(d, -1, sizeof d);
+    queue<PII> q;
+    q.push(a);
+    d[a.first][a.second] = 0;
+    while(!q.empty()) {
+      int x = q.front().first, y = q.front().second;
+      q.pop();
+      for(auto [s, t]: king_dir) {
+        int X = x + s, Y = y + t;
+        if(is_valid(X, Y) && d[X][Y] == -1) {
+          q.push({X, Y});
+          d[X][Y] = d[x][y] + 1;
+        }
+      }
+    }
+
+    if(d[b.first][b.second] == -1)
+      cout << "King Peter, you can't go now!";
+    else
+      cout << "Minimal possible length of a trip is " << d[b.first][b.second];
+    cout << '\n';
+  }
+
+  int main() {
+    fast;
+
+    tests
+      solve();
+
+    return 0;
+  }
+  ```
+</details>
+
