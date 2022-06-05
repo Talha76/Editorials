@@ -114,6 +114,8 @@
   ***Case 2:*** Applying the above procedure, similarly we get another 4 transitions ${(N, M), (N, -M), (-N, M), (-N, -M)}$.  
   These transitions indicates that $c=a+transition_i.first$ and $d=b+transition_i.second$.  
 
+  There are two corner cases regarding the transitions. These are when $M=N$ and when $M=0\textit{ or } N=0$.
+
   Now using these transitions, we can iterate through all the possible visitable cells, and in each cell we will 
   count the number of accessible cells from that cell. If the count is odd, we will increase the even counter by 
   else we will increase the odd counter by one.
@@ -193,13 +195,4 @@
     return 0;
   }
   ```
-</details>
-
-## [C - Morning Walk](https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=1537)
-
-## [D - Crazy King](https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=2327)
-<details>
-  <summary>Summary</summary>
-
-  You are given a $N\cdot M$ chessboard which contains any of these symbols $\left\{'.','Z','A','B'\right\}$
 </details>
