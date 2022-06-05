@@ -18,7 +18,7 @@
   of ${L_i}\'$.  
   We repeat the steps and at each step, we record the distance of the integers.  
 
-  This above can be implemented using BFS. While iterating a number $x$, we will apply the operation i.e. we will add the $RV_i$ 
+  This above can be implemented using BFS. While iterating a number $x$, we will apply the operation i.even. we will add the $RV_i$ 
   with $x$ and if the number is not visited before, then we will store the number in the queue, and we will update it's distance 
   by $distance[x + RV_i] = distance[x] + 1;$.  
   If it is possible to get $U$ from $L$, then $U$ will be visited once. Otherwise, $U$ will never be visited. (And obviously the 
@@ -86,3 +86,111 @@
   ```
 </details>
 
+## [B - Knight in a War Grid](https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=3057)
+<details>
+  <summary>Summary</summary>
+
+  You are given $R$, $C$ denoting number of rows and columns of an $R\times C$ grid. You are also given $M$, $N$ which denotes that we 
+  can move from $(a, b)$ to $(c, d)$ iff any of this two conditions satisfies:
+  $$|a-c|=M\textit{ and }|b-d|=N$$
+  $$or$$
+  $$|a-c|=N\textit{ and }|b-d|=M$$
+  And then you are given $W$, denoting there are $W$ blocked cells which you cannot visit, and the blocked cells 
+  $x_i, y_i$ are given.  
+
+  Let us define a cell $even$, if the count of accessible cells from that cell in one move is even. And we define $odd$ 
+  cell, if the number of accessible cells from that cell in one move is odd numbered. **Note:** All the blocked cells are 
+  inaccessible.  
+  You will start from cell $(0, 0)$ (Note: The grid is indexed in 0-base). You will visit all possible cells you can visit on your path and return to $(0, 0)$. After the visit output the number of even cells and odd cells.
+</details>
+<details>
+  <summary>Tutorial</summary>
+
+  We can use BFS to solve this problem. At the outset, let's find out the cells we can visit if we are presently in 
+  cell $(a, b)$. Let's say we can go to $(c, d)$ in one move. So,   
+  ***Case 1:*** $(|a-c|=M)\Rightarrow (a-c=M\textit{ or }-(a-c)=M)\Rightarrow (c=a-M\textit{ or }c=a+M)$ and 
+  $(|b-d|=N)\Rightarrow (b-d=N\textit{ or }-(b-d)=N)\Rightarrow (d=b-N\textit{ or }d=b+N)$. So we get $2\times 2=4$ 
+  transitions ${(M, N), (M, -N), (-M, N), (-M, -N)}$.  
+  ***Case 2:*** Applying the above procedure, similarly we get another 4 transitions ${(N, M), (N, -M), (-N, M), (-N, -M)}$.  
+  These transitions indicates that $c=a+transition_i.first$ and $d=b+transition_i.second$.  
+
+  Now using these transitions, we can iterate through all the possible visitable cells, and in each cell we will 
+  count the number of accessible cells from that cell. If the count is odd, we will increase the even counter by 
+  else we will increase the odd counter by one.
+</details>
+<details>
+  <summary>Solution</summary>
+
+  ```cpp
+  #include "bits/stdc++.h"
+
+  #define fast ios::sync_with_stdio(0);cin.tie(0)
+  #define tests int t=1;if(multi_test)cin>>t;for(int kase=1;kase<=t;kase++)
+  #define caseout cout << "Case " << kase << ": "
+  #define range(v, n) v, v + n
+  #define all(v) v.begin(), v.end()
+  #define toN(v, n) v.begin(), v.begin() + n
+  #define ulta(v) v.rbegin(), v.rend()
+
+  using namespace std;
+
+  typedef long long ll;
+  typedef pair<int, int> PII;
+
+  const bool multi_test = true;
+  int r, c, m, n, w, odd, even;
+  set<PII> water, vis;
+  queue<PII> q;
+
+  bool is_valid(int x, int y) {
+    return x >= 0 && y >= 0 && x < r && y < c && !water.count({x, y});
+  }
+
+  void solve(int kase) {
+    cin >> r >> c >> m >> n >> w;
+    while(w--) {
+      int x, y;
+      cin >> x >> y;
+      water.emplace(PII{x, y});
+    }
+
+    vector<PII> dir {{m, n}, {-m, n}, {m, -n}, {-m, -n},
+                     {n, m}, {-n, m}, {n, -m}, {-n, -m}};
+    sort(all(dir));
+    dir.erase(unique(all(dir)), dir.end());
+    
+    even = odd = 0;
+    q.push({0, 0});
+    vis.emplace(PII{0, 0});
+    while(!q.empty()) {
+      int x, y, X, Y, cnt = 0;
+      x = q.front().first, y = q.front().second;
+      q.pop();
+      for(auto [a, b]: dir) {
+        X = x + a, Y = y + b;
+        if(is_valid(X, Y)) {
+          cnt++;
+          if(!vis.count({X, Y})) {
+            vis.emplace(PII{X, Y});
+            q.push({X, Y});
+          }
+        }
+      }
+      cnt & 1 ? odd++ : even++;
+    }
+
+    caseout << even << ' ' << odd << '\n';
+    water.clear();
+    vis.clear();
+  }
+
+  int main() {
+    fast;
+
+    tests
+      solve(kase);
+
+    return 0;
+  }
+  ```
+</details>
