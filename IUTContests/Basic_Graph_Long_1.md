@@ -194,3 +194,12 @@
   }
   ```
 </details>
+
+## [C - Morning Walk](https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=1537)
+
+## [D - Crazy King](https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=2327)
+<details>
+  <summary>Summary</summary>
+
+  You are given a $N\cdot M$ chessboard which contains any of these symbols $\left\{'.','Z','A','B'\right\}$
+</details>
