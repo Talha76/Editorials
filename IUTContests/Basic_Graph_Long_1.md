@@ -322,3 +322,132 @@
   ```
 </details>
 
+## [E - Sticker Collector Robot](https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=2931)
+<details>
+  <summary>Summary</summary>
+
+  You are given a $N\times M$ grid which contains four characters-
+  - '.' $\rightarrow$ Normal cell
+  - '*' $\rightarrow$ Cell with sticker
+  - '#' $\rightarrow$ Blocked cell
+  - 'N' or 'S' or 'L' or 'O' denoting North, South, East and West respectively.  
+  
+  You will start at the cell with the alphabetic character facing the direction as stated above. And you are given a set of 
+  instructions as a string $S$, which contains-
+  - $D$ $\rightarrow$ Rotate 90 degree right from present facing direction
+  - $E$ $\rightarrow$ Rotate 90 degree left from present facing direction
+  - $F$ $\rightarrow$ Move one step forward  
+
+  If you are on a cell containing sticker then you collect the sticker. 
+  You cannot move forward to such cells which are blocked or which does not exist. If such command appears, then the command 
+  is not executed i.e. you remain at your current cell. Show how many stickers can you collect.
+</details>
+<details>
+  <summary>Tutorial</summary>
+
+  The solution approach is simple. Let's say we are on cell $(a, b)$. The directions of this cell are-
+  - $(a-1,b) \rightarrow$ North of $(a, b)$
+  - $(a,b+1) \rightarrow$ East of $(a,b)$
+  - $(a+1,b) \rightarrow$ South of $(a,b)$
+  - $(a,b-1) \rightarrow$ West of $(a,b)$  
+  
+  Now, we have to store all of these transitions in such a way that we can easily convert the facing direction according to the 
+  instruction. We can do that by storing the directions in an array in a *clockwise* or *anti-clockwise* direction. An example 
+  is: $direction\in \\{(-1,0),(0,1),(1,0),(0,-1)\\}$(Clockwise).  
+  Let's define the present facing direction as $direction_i$. So, if we have to execute $D$, we can apply the transition 
+  $direction_{i+1}$ and if we have to execute $E$, we can apply the transition $direction_{i-1}$. Similarly, we can do 
+  vice-versa in case of $anti-clockwise$ direction. **Note:** The value of $i$ changes in a cyclic manner between $[0, 3]$.  
+  Then in each cell we visit, if we get a sticker, then we increase the sticker counter by $1$, and remove the sticker from that 
+  that cell. Finally, we print out the value of the sticker counter.
+</details>
+<details>
+  <summary>Solution</summary>
+
+  ```cpp
+  #include "bits/stdc++.h"
+
+  #define fast ios::sync_with_stdio(0);cin.tie(0)
+  #define tests int t=1;if(multi_test)cin>>t;for(int kase=1;kase<=t;kase++)
+  #define caseout cout << "Case " << kase << ": "
+  #define range(v, n) v, v + n
+  #define all(v) v.begin(), v.end()
+  #define toN(v, n) v.begin(), v.begin() + n
+  #define ulta(v) v.rbegin(), v.rend()
+
+  using namespace std;
+
+  typedef long long ll;
+  typedef pair<int, int> PII;
+
+  const bool multi_test = false;
+  int n, m, s, direction;
+  string t;
+  vector<string> g;
+  vector<PII> dir{{-1, 0}, {0, 1}, {1, 0}, {0, -1}};
+
+  PII initialize() {
+    for(int i = 0; i < n; i++) {
+      for(int j = 0; j < m; j++) {
+        if(isalpha(g[i][j])) {
+          switch(g[i][j]) {
+            case 'N': direction = 0;
+              break;
+            case 'S': direction = 2;
+              break;
+            case 'L': direction = 1;
+              break;
+            default: direction = 3;
+          }
+          return {i, j};
+        }
+      }
+    }
+    return {-1, -1};
+  }
+
+  bool is_valid(int x, int y) {
+    return x >= 0 && y >= 0 && x < n && y < m && g[x][y] != '#';
+  }
+
+  void solve() {
+    PII pos = initialize();
+    int cnt = 0;
+    for(auto c: t) {
+      switch(c) {
+        case 'D': direction = (direction + 1) % 4;
+          break;
+        case 'E': direction = (direction + 3) % 4;
+          break;
+        case 'F': {
+          int x = pos.first + dir[direction].first,
+              y = pos.second + dir[direction].second;
+          if(is_valid(x, y)) {
+            if(g[x][y] == '*') {
+              cnt++;
+              g[x][y] = '.';
+            }
+            pos = {x, y};
+          }
+        }
+      }
+    }
+
+    cout << cnt << '\n';
+  }
+
+  int main() {
+    fast;
+
+    while(cin >> n >> m >> s && n) {
+      g.resize(n);
+      for(auto &i: g)
+        cin >> i;
+      cin >> t;
+      solve();
+    }
+
+    return 0;
+  }
+  ```
+</details>
+
