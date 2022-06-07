@@ -110,8 +110,8 @@
   cell $(a, b)$. Let's say we can go to $(c, d)$ in one move. So,   
   ***Case 1:*** $(|a-c|=M)\Rightarrow (a-c=M\textit{ or }-(a-c)=M)\Rightarrow (c=a-M\textit{ or }c=a+M)$ and 
   $(|b-d|=N)\Rightarrow (b-d=N\textit{ or }-(b-d)=N)\Rightarrow (d=b-N\textit{ or }d=b+N)$. So we get $2\times 2=4$ 
-  transitions ${(M, N), (M, -N), (-M, N), (-M, -N)}$.  
-  ***Case 2:*** Applying the above procedure, similarly we get another 4 transitions ${(N, M), (N, -M), (-N, M), (-N, -M)}$.  
+  transitions $\\{(M, N), (M, -N), (-M, N), (-M, -N)\\}$.  
+  ***Case 2:*** Applying the above procedure, similarly we get another 4 transitions $\\{(N, M), (N, -M), (-N, M), (-N, -M)\\}$.  
   These transitions indicates that $c=a+transition_i.first$ and $d=b+transition_i.second$.  
 
   There are two corner cases regarding the transitions. These are when $M=N$ and when $M=0\textit{ or } N=0$.
