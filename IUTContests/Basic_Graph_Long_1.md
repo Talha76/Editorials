@@ -203,7 +203,7 @@
 <details>
   <summary>Summary</summary>
 
-  You are given a $N\times M$ chessboard which contains any of these symbols ${'.','Z','A','B'}$. Cells containing $'Z'$ are the cells occupied by knights. $'.'$ means unoccupied cells.  
+  You are given a $N\times M$ chessboard which contains any of these symbols $\\{'.','Z','A','B'\\}$. Cells containing $'Z'$ are the cells occupied by knights. $'.'$ means unoccupied cells.  
 
   You have to go to $'B'$ from $'A'$ satisfying the conditions below:  
   - You can move forward or backward by one step at a time diagonally, horizontally or 
