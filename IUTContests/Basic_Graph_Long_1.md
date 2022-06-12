@@ -451,3 +451,105 @@
   ```
 </details>
 
+## [G - Strongly Connected City](https://codeforces.com/problemset/problem/475/B)
+<details>
+  <summary>Tutorial</summary>
+
+  We can approach in a brute force way since the constraints allow us to do so. At first, we define the direction of row $i$ as $row_i$, and direction of column $j$ as $col_j$. And also lets define our directions-
+
+  - `>`$\rightarrow $ Right: $(0,1)$
+  - `<`$\rightarrow $ Left: $(0,-1)$
+  - `v`$\rightarrow $ Down: $(1,0)$
+  - `^`$\rightarrow $ Up: $(-1,0)$  
+
+  So, we can say, if we are on a cell $(i,j)$, then we can go right if $row_i=$`>`, and left if $row_i=$`<`. Again, we can go up if $col_i=$`^` and down if $col_i=$`v`.  
+  So we start from all of the cells and from each cell, traverse the whole grid using BFS. After traversing the whole grid, we check if all cells are visited then continue starting from next cell, if any of the cell is unvisited, then print $NO$. After applying BFS from all of the cells, if all of the cells are visited in each traversal, then print $YES$.
+</details>
+<details>
+  <summary>Solution</summary>
+
+  ```cpp
+  #include "bits/stdc++.h"
+
+  #define fast ios::sync_with_stdio(0);cin.tie(0)
+  #define tests int t=1;if(multi_test)cin>>t;for(int kase=1;kase<=t;kase++)
+  #define caseout cout << "Case " << kase << ": "
+  #define range(v, n) v, v + n
+  #define all(v) v.begin(), v.end()
+  #define toN(v, n) v.begin(), v.begin() + n
+  #define ulta(v) v.rbegin(), v.rend()
+
+  using namespace std;
+
+  typedef long long ll;
+  typedef pair<int, int> PII;
+
+  const bool multi_test = false;
+  int n, m;
+  vector<PII> h, v;
+
+  bool is_valid(int x, int y) {
+    return x >= 0 && y >= 0 && x < n && y < m;
+  }
+
+  bool bfs(int x, int y) {
+    queue<PII> q;
+    vector<vector<bool>> vis(n, vector<bool>(m));
+    q.push({x, y});
+    vis[x][y] = true;
+    while(!q.empty()) {
+      x = q.front().first, y = q.front().second;
+      q.pop();
+      int X = x + h[x].first, Y = y + h[x].second;
+      if(is_valid(X, Y) && !vis[X][Y]) {
+        vis[X][Y] = true;
+        q.push({X, Y});
+      }
+      X = x + v[y].first, Y = y + v[y].second;
+      if(is_valid(X, Y) && !vis[X][Y]) {
+        vis[X][Y] = true;
+        q.push({X, Y});
+      }
+    }
+
+    return all_of(all(vis), [](vector<bool> &v) {
+      for(auto i: v)
+        if(!i)
+          return false;
+      return true;
+    });
+  }
+
+  void solve(int kase) {
+    string hori, verti;
+    cin >> n >> m >> hori >> verti;
+
+    h.resize(n), v.resize(m);
+    for(int i = 0; i < n; i++)
+      h[i] = (hori[i] == '>' ? PII{0, 1} : PII{0, -1});
+    for(int i = 0; i < m; i++)
+      v[i] = (verti[i] == 'v' ? PII{1, 0} : PII{-1, 0});
+
+    for(int i = 0; i < n; i++) {
+      for(int j = 0; j < m; j++) {
+        if(!bfs(i, j)) {
+          cout << "NO\n";
+          return;
+        }
+      }
+    }
+
+    cout << "YES\n";
+  }
+
+  int main() {
+    fast;
+
+    tests
+      solve(kase);
+
+    return 0;
+  }
+  ```
+</details>
+
