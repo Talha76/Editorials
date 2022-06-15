@@ -562,5 +562,165 @@
   2. In an pre-order traversal, $\textit{Root, Left Subtree, Right Subtree}$ order is maintained.
   3. In an post-order traversal, $\textit{Left Subtree, Right Subtree, Root}$ order is maintained.
 
-  So, when we are given a pre-order and in-order traversal of a tree
+  So, when we are given a pre-order and in-order traversal of a tree, we can surely get the root of the tree which is the first character of the pre-order traversal. Let's say, in the in-order traversal, we get the root at position $i$. So, the left subtree belongs in $inorder[:(i-1)]$, and right subtree belongs in $inorder[(i+1):]$. And, we keep track of our index in the pre-order traversal to track the root using $j$. Initially, $j=0$. Now, the root of the left subtree is obviously the next character after the root of the main tree i.e. $j=1$. After extracting the left subtree in this way, we will update our $j$ continuously and after traversing the whole left subtree, we will get $j$ in the right subtree root. Then we can traverse the right subtree.  
+  So, we can summarize the above algorithm as follows: 
+  1. Initialize tree range $\\{l,r\\}=\\{0,n - 1\\}$ (let's assume length of the traversal is n).
+  2. Define pre-order traversal variable as $j$ and in-order traversal variable as $i$ and initialize $j=0$.
+  3. Find root in range $\\{l,r\\}$ and update $i=\textit{root in range l...r}$.
+  4. Define left subtree from in-order traversal as $inorder[l:(i-1)]$, and enter the left subtree and find root $j+1$.
+  5. Define right subtree from in-order traversal as $inorder[(i+1):r]$ and enter the right subtree and find root $j+1$(this j will be updated after the left tree traversal).
+  6. First traverse whole of the left subtree by updating the range $\\{l,r\\}=\\{l,(i-1)\\}$ and go back to $step 3$.
+  7. Then traverse whole of the right subtree by updating the range $\\{l,r\\}=\\{(i+1):r\\}$ and go back to $step 3$.
 </details>
+<details>
+  <summary>Solution 1</summary>
+
+  ```cpp
+  #include "bits/stdc++.h"
+
+  #define fast ios::sync_with_stdio(0);cin.tie(0)
+  #define tests int t=1;if(multi_test)cin>>t;for(int kase=1;kase<=t;kase++)
+  #define caseout cout << "Case " << kase << ": "
+  #define range(v, n) v, v + n
+  #define all(v) v.begin(), v.end()
+  #define toN(v, n) v.begin(), v.begin() + n
+  #define ulta(v) v.rbegin(), v.rend()
+
+  using namespace std;
+
+  typedef long long ll;
+  typedef pair<int, int> PII;
+
+  const bool multi_test = false;
+  // vector<vector<int>> tree;
+  string in, pre, post;
+
+  // void post_order(int node) {
+  //   for(auto child: tree[node])
+  //     post_order(child);
+  //   cout << char(node + 65);
+  // }
+
+  int recover_tree(int &i, int l, int r) {
+    if(l == r)
+      return -1;
+    if(r - l == 1) {
+      post += pre[i];
+      return pre[i];
+    }
+
+    int j, root = pre[i];
+    for(j = l; j < r; j++)
+      if(in[j] == root)
+        break;
+    root -= 65;
+
+    int child = recover_tree(++i, l, j);
+    if(child == -1)
+      i--;
+    // else
+    //   tree[root].push_back(child);
+    child = recover_tree(++i, j + 1, r);
+    if(child == -1)
+      i--;
+    // else
+    //   tree[root].push_back(child);
+
+    post += (65 + root);
+    return root;
+  }
+
+  void solve() {
+    int i = 0;
+    // tree.assign(in.size(), vector<int>(0));
+    recover_tree(i, 0, in.size());
+    cout << post << '\n';
+    post.clear();
+    // post_order(0);
+  }
+
+  int main() {
+    // fast;
+
+    while(cin >> pre >> in)
+      solve();
+
+    return 0;
+  }
+  ```
+</details>
+<details>
+  <summary>Solution 2</summary>
+
+  ```cpp
+  #include "bits/stdc++.h"
+
+  #define fast ios::sync_with_stdio(0);cin.tie(0)
+  #define tests int t=1;if(multi_test)cin>>t;for(int kase=1;kase<=t;kase++)
+  #define caseout cout << "Case " << kase << ": "
+  #define range(v, n) v, v + n
+  #define all(v) v.begin(), v.end()
+  #define toN(v, n) v.begin(), v.begin() + n
+  #define ulta(v) v.rbegin(), v.rend()
+
+  using namespace std;
+
+  typedef long long ll;
+  typedef pair<int, int> PII;
+
+  const bool multi_test = false;
+  vector<vector<int>> tree;
+  string in, pre;
+
+  void post_order(int node) {
+    for(auto child: tree[node])
+      post_order(child);
+    cout << char(node + 65);
+  }
+
+  int recover_tree(int &i, int l, int r) {
+    if(l == r)
+      return -1;
+    if(r - l == 1) {
+      return pre[i] - 65;
+    }
+
+    int j, root = pre[i];
+    for(j = l; j < r; j++)
+      if(in[j] == root)
+        break;
+    root -= 65;
+
+    int child = recover_tree(++i, l, j);
+    if(child == -1)
+      i--;
+    else
+      tree[root].push_back(child);
+    child = recover_tree(++i, j + 1, r);
+    if(child == -1)
+      i--;
+    else
+      tree[root].push_back(child);
+
+    return root;
+  }
+
+  void solve() {
+    int i = 0;
+    tree.assign(in.size(), vector<int>(0));
+    recover_tree(i, 0, in.size());
+    post_order(pre[0] - 65);
+    cout << '\n';
+  }
+
+  int main() {
+    // fast;
+
+    while(cin >> pre >> in)
+      solve();
+
+    return 0;
+  }
+  ```
+</details>
+
