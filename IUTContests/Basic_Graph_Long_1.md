@@ -451,6 +451,9 @@
   ```
 </details>
 
+## [F - Forwarding Emails](https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=3873)
+
+
 ## [G - Strongly Connected City](https://codeforces.com/problemset/problem/475/B)
 <details>
   <summary>Tutorial</summary>
