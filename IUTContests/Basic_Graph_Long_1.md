@@ -11,11 +11,11 @@
 <details>
   <summary>Tutorial</summary>
 
-  Let us say, we get $R$ different integers ${L_1}\',{L_2}\',{L_3}\',...,{L_R}\'$ by applying the operation to $L$ once. So we can 
-  say that minimum $distance$ from $L$ to all of ${L_i}\'$ is $1$. Because from $L$ there is no other minimal way to visit all ${L_i}\'$. 
-  Similarly, from each of the ${L_i}\'$ we will get $x_i$ integers after applying the operation for the second time to all 
-  of the ${L_i}\'$. Here $x_i\leq R$, because after applying operation second time, we may get some integers which are the repeatation 
-  of ${L_i}\'$.  
+  Let us say, we get $R$ different integers ${L_1}',{L_2}',{L_3}',...,{L_R}'$ by applying the operation to $L$ once. So we can 
+  say that minimum $distance$ from $L$ to all of ${L_i}'$ is $1$. Because from $L$ there is no other minimal way to visit all ${L_i}'$. 
+  Similarly, from each of the ${L_i}'$ we will get $x_i$ integers after applying the operation for the second time to all 
+  of the ${L_i}'$. Here $x_i\leq R$, because after applying operation second time, we may get some integers which are the repeatation 
+  of ${L_i}'$.  
   We repeat the steps and at each step, we record the distance of the integers.  
 
   This above can be implemented using BFS. While iterating a number $x$, we will apply the operation i.even. we will add the $RV_i$ 
@@ -553,3 +553,14 @@
   ```
 </details>
 
+## [H - Tree Recovery](https://onlinejudge.org/index.php?option=onlinejudge&Itemid=8&page=show_problem&problem=477)
+<details>
+  <summary>Tutorial</summary>
+
+  At first let's know about the in-order, pre-order, and post-order traversal of a tree.  
+  1. In an in-order traversal, $\textit{Left Subtree, Root, Right Subtree}$ order is maintained.
+  2. In an pre-order traversal, $\textit{Root, Left Subtree, Right Subtree}$ order is maintained.
+  3. In an post-order traversal, $\textit{Left Subtree, Right Subtree, Root}$ order is maintained.
+
+  So, when we are given a pre-order and in-order traversal of a tree
+</details>
