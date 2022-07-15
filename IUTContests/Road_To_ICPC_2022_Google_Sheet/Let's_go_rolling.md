@@ -8,7 +8,7 @@
   <details>
     <summary>Base Case</summary>
 
-    dp[n][i] = 0, for all i
+    dp[n][i] = 0, for all i ( 0-base indexing )
   </details>
   <details>
     <summary>Transition</summary>
