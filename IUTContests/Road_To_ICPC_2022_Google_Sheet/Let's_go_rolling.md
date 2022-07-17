@@ -4,7 +4,7 @@
 
   This is a DP solution.
   We take the input as pairs, i.e. $pair\\{a, b\\} = \\{\textit{co-ordinate}, cost\\}$. Then we sort the array of pairs, since we need to traverse the array in increasing order.
-  Now, for each index of co-ordinate, we have 2 options, either to stick a pin to it or let it roll to the previous stuck pin. We can do this with a naive recursion. But If we look closely, for every index and every stuck pin previous to this index, we will repeat the same recursive procedure, which we can store in $dp_{i,j}=\textrm{minimum cost for index i if j was pinned before}$. So, we apply this dp function to all $i,j,1\leq j< i \leq n$.
+  Now, for each index of co-ordinate, we have 2 options, either to stick a pin to it or let it roll to the previous stuck pin. We can do this with a naive recursion. But If we look closely, for every index and every stuck pin previous to this index, we will repeat the same recursive procedure, which we can store in $dp_{i,j}=\textrm{minimum cost for index i if j was pinned before}$. So, we apply this dp function to all $i,j,1\leq j< i \leq n$. It will take $O(n^2)$ space and time complexity.
   <details>
     <summary>Base Case</summary>
 
