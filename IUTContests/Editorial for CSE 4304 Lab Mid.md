@@ -127,7 +127,94 @@ What is the best time for performing the reorder?
 <details>
 <summary>Solution</summary>
 
-I'm tired now, will write later.
+### observations
+Adding new boxes is trivial, we put it at the top of the pile(the word pile will be used to avoid confusion with the data structure: stack). Removing, however, needs some observation.
+
+Lets analyze the simpler cases. 
+1. The next number to be removed is on top of the pile: In that case we remove that.
+2. The next number to be removed is NOT on top of the pile: In that case, we must rearrange.
+
+As we want to minimize the numbers of rearrange operations, we should rearrange the pile in a smart way- that reduces the number of rearranges in future. 
+
+Lets think of the case when we only have remove operations left. The best case here is when the pile is sorted, having the smallest number on top. In that case, we can remove all elements without needing to rearrange. This strategy will always work, because we will never remove a larger element before a smaller one.
+
+The final observation is, if we insert a new element after the pile has been sorted, we cannot remove any sorted element because of the new element being on top; thus if needed, the pile needs to be sorted again.
+### solution
+We will maintain a stack of the numbers of boxes, which have been added after the pile was last sorted. A empty stack will represent the current pile is sorted.
+
+- ADD: we push the new element to our stack.
+- REMOVE:
+    - if the stack is non-empty: We have added new elements after the last sort. So, we check if the top element of stack is the number to be removed or not.
+    1. If it is: we pop from the stack and move on to next operation.
+    2. If its not: The only option is to re-sort the pile again; so we clear the stack, and increase the result by one.
+    - if the stack is empty: Means the pile is sorted in our favor; we move on to next operation.
+
+### code
+```cpp
+//#pragma GCC optimize("Ofast,unroll-loops")
+//#pragma GCC target("avx2,popcnt,lzcnt,abm,bmi,bmi2,fma,tune=native")
+ 
+#include <bits/stdc++.h>
+#include <ext/pb_ds/assoc_container.hpp>
+#include <ext/pb_ds/tree_policy.hpp>
+ 
+using namespace std;
+using namespace __gnu_pbds;
+using ll = long long;
+using vi = vector<ll>;
+using pi = pair<ll, ll>;
+using grid = vector<vi>;
+ 
+template<class T>
+using ordered_set = tree<T, null_type, less<T>, rb_tree_tag, 
+                         tree_order_statistics_node_update>; 
+#define en "\n"
+#define sz(_O) _O.size()
+#define fix(_O) cout<<setprecision(_O)<<fixed
+#define fir(_O) for(int i=0; i<_O; ++i)
+#define fjr(_O) for(int j=0; j<_O; ++j)
+ 
+ll const inf = 1e18; //0x3f3f3f3f3f3f;
+ll const mod = 998244353; //1e9+7;
+ 
+void solve(){
+  ll n; cin>>n;
+  stack<ll> st;
+  ll nn=1, res=0;
+  fir(2*n){
+    string s; cin>>s;
+    if(s=="add"){
+      ll t; cin>>t;
+      st.push(t);
+    }
+    else{
+      if(st.size() and st.top()==nn){
+        ll up=st.top();
+        st.pop();
+      }
+      else if(st.size()){
+        res++;
+        st=stack<ll>();
+      }
+      nn++;
+    }
+  }
+  cout<<res<<en;
+}
+ 
+int main(){
+  ios_base::sync_with_stdio(false);
+  cin.tie(0);
+ 
+  int tt = 1;// cin>>tt;
+  fir(tt){
+    //cout<<"Case "<<i+1<<":"<<en;
+    solve();
+  }
+}
+//author: Mahiur Kabir
+```
+
 
 </details>
 </details>
